@@ -1,0 +1,50 @@
+﻿@model API.Models.APPLICATION
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>APPLICATION</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.APP_STATUS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.APP_STATUS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DATE_SUBMITTED)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DATE_SUBMITTED)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JOB.SITE_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JOB.SITE_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.STUDENT.FIRST_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.STUDENT.FIRST_NAME)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.APPLICATION_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

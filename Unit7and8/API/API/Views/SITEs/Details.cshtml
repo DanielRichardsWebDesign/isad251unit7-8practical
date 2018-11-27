@@ -1,0 +1,42 @@
+﻿@model API.Models.SITE
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SITE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SITE_ADDRESS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SITE_ADDRESS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SITE_POSTCODE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SITE_POSTCODE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.COMPANY.COMPANY_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.COMPANY.COMPANY_NAME)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SITE_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,483 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ADMIN">
+          <Key>
+            <PropertyRef Name="ADMIN_ID" />
+          </Key>
+          <Property Name="ADMIN_ID" Type="varchar2" MaxLength="4" Nullable="false" />
+          <Property Name="ADMIN_USERNAME" Type="varchar2" MaxLength="10" Nullable="false" />
+          <Property Name="ADMIN_PASSWORD" Type="varchar2" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="APPLICATION">
+          <Key>
+            <PropertyRef Name="APPLICATION_ID" />
+          </Key>
+          <Property Name="APPLICATION_ID" Type="varchar2" MaxLength="4" Nullable="false" />
+          <Property Name="JOB_ID" Type="number" Precision="8" Scale="0" />
+          <Property Name="SRN" Type="varchar2" MaxLength="4" />
+          <Property Name="APP_STATUS" Type="varchar2" MaxLength="40" Nullable="false" />
+          <Property Name="DATE_SUBMITTED" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COMPANY">
+          <Key>
+            <PropertyRef Name="COMPANY_ID" />
+          </Key>
+          <Property Name="COMPANY_ID" Type="varchar2" MaxLength="4" Nullable="false" />
+          <Property Name="COMPANY_NAME" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="COMPANY_EMAIL" Type="varchar2" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JOB">
+          <Key>
+            <PropertyRef Name="JOB_ID" />
+          </Key>
+          <Property Name="JOB_ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="SITE_ID" Type="varchar2" MaxLength="4" />
+          <Property Name="JOB_TITLE" Type="varchar2" MaxLength="200" Nullable="false" />
+          <Property Name="JOB_DESC" Type="varchar2" MaxLength="500" Nullable="false" />
+          <Property Name="CONTACT_EMAIL" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="CONTACT_PHONE" Type="varchar2" MaxLength="15" Nullable="false" />
+          <Property Name="JOB_SALARY" Type="number" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="START_DATE" Type="date" Nullable="false" />
+          <Property Name="CLOSE_DATE" Type="date" Nullable="false" />
+          <Property Name="APPLICATION_METHOD" Type="varchar2" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PROGRAMME">
+          <Key>
+            <PropertyRef Name="PROGRAMME_CODE" />
+          </Key>
+          <Property Name="PROGRAMME_CODE" Type="varchar2" MaxLength="4" Nullable="false" />
+          <Property Name="PROGRAMME_NAME" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="PROGRAMME_LEADER" Type="varchar2" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SITES">
+          <Key>
+            <PropertyRef Name="SITE_ID" />
+          </Key>
+          <Property Name="SITE_ID" Type="varchar2" MaxLength="4" Nullable="false" />
+          <Property Name="COMPANY_ID" Type="varchar2" MaxLength="4" />
+          <Property Name="SITE_ADDRESS" Type="varchar2" MaxLength="60" Nullable="false" />
+          <Property Name="SITE_POSTCODE" Type="varchar2" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="STUDENT">
+          <Key>
+            <PropertyRef Name="SRN" />
+          </Key>
+          <Property Name="SRN" Type="varchar2" MaxLength="4" Nullable="false" />
+          <Property Name="FIRST_NAME" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="LAST_NAME" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="STUDENT_USERNAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="STUDENT_PASS" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="PROGRAMME_CODE" Type="varchar2" MaxLength="4" />
+          <Property Name="DOB" Type="date" Nullable="false" />
+          <Property Name="HOUSE_NUMBER_TERM" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="STREET_TERM" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="POSTCODE_TERM" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="HOUSE_NUMBER_HOME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="STREET_HOME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="POSTCODE_HOME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="MOBILE_NUMBER" Type="varchar2" MaxLength="15" Nullable="false" />
+          <Property Name="LANDLINE_NUMBER" Type="varchar2" MaxLength="15" Nullable="false" />
+          <Property Name="EMAIL_ADDRESS" Type="varchar2" MaxLength="30" Nullable="false" />
+          <Property Name="PLACEMENT_NOTES" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="CV_SUBMITTED" Type="varchar2" MaxLength="1" Nullable="false" />
+          <Property Name="CV_APPROVED" Type="varchar2" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <Association Name="COMPANY_ID_FK">
+          <End Role="COMPANY" Type="Self.COMPANY" Multiplicity="0..1" />
+          <End Role="SITES" Type="Self.SITES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPANY">
+              <PropertyRef Name="COMPANY_ID" />
+            </Principal>
+            <Dependent Role="SITES">
+              <PropertyRef Name="COMPANY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="JOB_ID_FK">
+          <End Role="JOB" Type="Self.JOB" Multiplicity="0..1" />
+          <End Role="APPLICATION" Type="Self.APPLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JOB">
+              <PropertyRef Name="JOB_ID" />
+            </Principal>
+            <Dependent Role="APPLICATION">
+              <PropertyRef Name="JOB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PROGRAMME_CODE_FK">
+          <End Role="PROGRAMME" Type="Self.PROGRAMME" Multiplicity="0..1" />
+          <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROGRAMME">
+              <PropertyRef Name="PROGRAMME_CODE" />
+            </Principal>
+            <Dependent Role="STUDENT">
+              <PropertyRef Name="PROGRAMME_CODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SITE_ID_FK">
+          <End Role="SITES" Type="Self.SITES" Multiplicity="0..1" />
+          <End Role="JOB" Type="Self.JOB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SITES">
+              <PropertyRef Name="SITE_ID" />
+            </Principal>
+            <Dependent Role="JOB">
+              <PropertyRef Name="SITE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SRN_FK">
+          <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="0..1" />
+          <End Role="APPLICATION" Type="Self.APPLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENT">
+              <PropertyRef Name="SRN" />
+            </Principal>
+            <Dependent Role="APPLICATION">
+              <PropertyRef Name="SRN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="ADMIN" EntityType="Self.ADMIN" Schema="APEX829" store:Type="Tables" />
+          <EntitySet Name="APPLICATION" EntityType="Self.APPLICATION" Schema="APEX829" store:Type="Tables" />
+          <EntitySet Name="COMPANY" EntityType="Self.COMPANY" Schema="APEX829" store:Type="Tables" />
+          <EntitySet Name="JOB" EntityType="Self.JOB" Schema="APEX829" store:Type="Tables" />
+          <EntitySet Name="PROGRAMME" EntityType="Self.PROGRAMME" Schema="APEX829" store:Type="Tables" />
+          <EntitySet Name="SITES" EntityType="Self.SITES" Schema="APEX829" store:Type="Tables" />
+          <EntitySet Name="STUDENT" EntityType="Self.STUDENT" Schema="APEX829" store:Type="Tables" />
+          <AssociationSet Name="COMPANY_ID_FK" Association="Self.COMPANY_ID_FK">
+            <End Role="COMPANY" EntitySet="COMPANY" />
+            <End Role="SITES" EntitySet="SITES" />
+          </AssociationSet>
+          <AssociationSet Name="JOB_ID_FK" Association="Self.JOB_ID_FK">
+            <End Role="JOB" EntitySet="JOB" />
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+          </AssociationSet>
+          <AssociationSet Name="PROGRAMME_CODE_FK" Association="Self.PROGRAMME_CODE_FK">
+            <End Role="PROGRAMME" EntitySet="PROGRAMME" />
+            <End Role="STUDENT" EntitySet="STUDENT" />
+          </AssociationSet>
+          <AssociationSet Name="SITE_ID_FK" Association="Self.SITE_ID_FK">
+            <End Role="SITES" EntitySet="SITES" />
+            <End Role="JOB" EntitySet="JOB" />
+          </AssociationSet>
+          <AssociationSet Name="SRN_FK" Association="Self.SRN_FK">
+            <End Role="STUDENT" EntitySet="STUDENT" />
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ADMIN">
+          <Key>
+            <PropertyRef Name="ADMIN_ID" />
+          </Key>
+          <Property Name="ADMIN_ID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ADMIN_USERNAME" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ADMIN_PASSWORD" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="APPLICATION">
+          <Key>
+            <PropertyRef Name="APPLICATION_ID" />
+          </Key>
+          <Property Name="APPLICATION_ID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="JOB_ID" Type="Int32" />
+          <Property Name="SRN" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="APP_STATUS" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DATE_SUBMITTED" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="JOB" Relationship="Self.JOB_ID_FK" FromRole="APPLICATION" ToRole="JOB" />
+          <NavigationProperty Name="STUDENT" Relationship="Self.SRN_FK" FromRole="APPLICATION" ToRole="STUDENT" />
+        </EntityType>
+        <EntityType Name="COMPANY">
+          <Key>
+            <PropertyRef Name="COMPANY_ID" />
+          </Key>
+          <Property Name="COMPANY_ID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COMPANY_NAME" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COMPANY_EMAIL" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SITES" Relationship="Self.COMPANY_ID_FK" FromRole="COMPANY" ToRole="SITES" />
+        </EntityType>
+        <EntityType Name="JOB">
+          <Key>
+            <PropertyRef Name="JOB_ID" />
+          </Key>
+          <Property Name="JOB_ID" Type="Int32" Nullable="false" />
+          <Property Name="SITE_ID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="JOB_TITLE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="JOB_DESC" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CONTACT_EMAIL" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CONTACT_PHONE" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="JOB_SALARY" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="START_DATE" Type="DateTime" Nullable="false" />
+          <Property Name="CLOSE_DATE" Type="DateTime" Nullable="false" />
+          <Property Name="APPLICATION_METHOD" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="APPLICATIONs" Relationship="Self.JOB_ID_FK" FromRole="JOB" ToRole="APPLICATION" />
+          <NavigationProperty Name="SITE" Relationship="Self.SITE_ID_FK" FromRole="JOB" ToRole="SITES" />
+        </EntityType>
+        <EntityType Name="PROGRAMME">
+          <Key>
+            <PropertyRef Name="PROGRAMME_CODE" />
+          </Key>
+          <Property Name="PROGRAMME_CODE" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PROGRAMME_NAME" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PROGRAMME_LEADER" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="STUDENTs" Relationship="Self.PROGRAMME_CODE_FK" FromRole="PROGRAMME" ToRole="STUDENT" />
+        </EntityType>
+        <EntityType Name="SITE">
+          <Key>
+            <PropertyRef Name="SITE_ID" />
+          </Key>
+          <Property Name="SITE_ID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COMPANY_ID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="SITE_ADDRESS" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SITE_POSTCODE" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="COMPANY" Relationship="Self.COMPANY_ID_FK" FromRole="SITES" ToRole="COMPANY" />
+          <NavigationProperty Name="JOBs" Relationship="Self.SITE_ID_FK" FromRole="SITES" ToRole="JOB" />
+        </EntityType>
+        <EntityType Name="STUDENT">
+          <Key>
+            <PropertyRef Name="SRN" />
+          </Key>
+          <Property Name="SRN" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FIRST_NAME" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LAST_NAME" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STUDENT_USERNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STUDENT_PASS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PROGRAMME_CODE" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" />
+          <Property Name="HOUSE_NUMBER_TERM" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STREET_TERM" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="POSTCODE_TERM" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HOUSE_NUMBER_HOME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STREET_HOME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="POSTCODE_HOME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MOBILE_NUMBER" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LANDLINE_NUMBER" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMAIL_ADDRESS" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PLACEMENT_NOTES" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CV_SUBMITTED" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CV_APPROVED" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="APPLICATIONs" Relationship="Self.SRN_FK" FromRole="STUDENT" ToRole="APPLICATION" />
+          <NavigationProperty Name="PROGRAMME" Relationship="Self.PROGRAMME_CODE_FK" FromRole="STUDENT" ToRole="PROGRAMME" />
+        </EntityType>
+        <Association Name="JOB_ID_FK">
+          <End Role="JOB" Type="Self.JOB" Multiplicity="0..1" />
+          <End Role="APPLICATION" Type="Self.APPLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JOB">
+              <PropertyRef Name="JOB_ID" />
+            </Principal>
+            <Dependent Role="APPLICATION">
+              <PropertyRef Name="JOB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SRN_FK">
+          <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="0..1" />
+          <End Role="APPLICATION" Type="Self.APPLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENT">
+              <PropertyRef Name="SRN" />
+            </Principal>
+            <Dependent Role="APPLICATION">
+              <PropertyRef Name="SRN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="COMPANY_ID_FK">
+          <End Role="COMPANY" Type="Self.COMPANY" Multiplicity="0..1" />
+          <End Role="SITES" Type="Self.SITE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPANY">
+              <PropertyRef Name="COMPANY_ID" />
+            </Principal>
+            <Dependent Role="SITES">
+              <PropertyRef Name="COMPANY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SITE_ID_FK">
+          <End Role="SITES" Type="Self.SITE" Multiplicity="0..1" />
+          <End Role="JOB" Type="Self.JOB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SITES">
+              <PropertyRef Name="SITE_ID" />
+            </Principal>
+            <Dependent Role="JOB">
+              <PropertyRef Name="SITE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PROGRAMME_CODE_FK">
+          <End Role="PROGRAMME" Type="Self.PROGRAMME" Multiplicity="0..1" />
+          <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROGRAMME">
+              <PropertyRef Name="PROGRAMME_CODE" />
+            </Principal>
+            <Dependent Role="STUDENT">
+              <PropertyRef Name="PROGRAMME_CODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ADMINs" EntityType="Self.ADMIN" />
+          <EntitySet Name="APPLICATIONs" EntityType="Self.APPLICATION" />
+          <EntitySet Name="COMPANies" EntityType="Self.COMPANY" />
+          <EntitySet Name="JOBs" EntityType="Self.JOB" />
+          <EntitySet Name="PROGRAMMEs" EntityType="Self.PROGRAMME" />
+          <EntitySet Name="SITES" EntityType="Self.SITE" />
+          <EntitySet Name="STUDENTs" EntityType="Self.STUDENT" />
+          <AssociationSet Name="JOB_ID_FK" Association="Self.JOB_ID_FK">
+            <End Role="JOB" EntitySet="JOBs" />
+            <End Role="APPLICATION" EntitySet="APPLICATIONs" />
+          </AssociationSet>
+          <AssociationSet Name="SRN_FK" Association="Self.SRN_FK">
+            <End Role="STUDENT" EntitySet="STUDENTs" />
+            <End Role="APPLICATION" EntitySet="APPLICATIONs" />
+          </AssociationSet>
+          <AssociationSet Name="COMPANY_ID_FK" Association="Self.COMPANY_ID_FK">
+            <End Role="COMPANY" EntitySet="COMPANies" />
+            <End Role="SITES" EntitySet="SITES" />
+          </AssociationSet>
+          <AssociationSet Name="SITE_ID_FK" Association="Self.SITE_ID_FK">
+            <End Role="SITES" EntitySet="SITES" />
+            <End Role="JOB" EntitySet="JOBs" />
+          </AssociationSet>
+          <AssociationSet Name="PROGRAMME_CODE_FK" Association="Self.PROGRAMME_CODE_FK">
+            <End Role="PROGRAMME" EntitySet="PROGRAMMEs" />
+            <End Role="STUDENT" EntitySet="STUDENTs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="ADMINs">
+            <EntityTypeMapping TypeName="Model.ADMIN">
+              <MappingFragment StoreEntitySet="ADMIN">
+                <ScalarProperty Name="ADMIN_ID" ColumnName="ADMIN_ID" />
+                <ScalarProperty Name="ADMIN_USERNAME" ColumnName="ADMIN_USERNAME" />
+                <ScalarProperty Name="ADMIN_PASSWORD" ColumnName="ADMIN_PASSWORD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APPLICATIONs">
+            <EntityTypeMapping TypeName="Model.APPLICATION">
+              <MappingFragment StoreEntitySet="APPLICATION">
+                <ScalarProperty Name="APPLICATION_ID" ColumnName="APPLICATION_ID" />
+                <ScalarProperty Name="JOB_ID" ColumnName="JOB_ID" />
+                <ScalarProperty Name="SRN" ColumnName="SRN" />
+                <ScalarProperty Name="APP_STATUS" ColumnName="APP_STATUS" />
+                <ScalarProperty Name="DATE_SUBMITTED" ColumnName="DATE_SUBMITTED" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMPANies">
+            <EntityTypeMapping TypeName="Model.COMPANY">
+              <MappingFragment StoreEntitySet="COMPANY">
+                <ScalarProperty Name="COMPANY_ID" ColumnName="COMPANY_ID" />
+                <ScalarProperty Name="COMPANY_NAME" ColumnName="COMPANY_NAME" />
+                <ScalarProperty Name="COMPANY_EMAIL" ColumnName="COMPANY_EMAIL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JOBs">
+            <EntityTypeMapping TypeName="Model.JOB">
+              <MappingFragment StoreEntitySet="JOB">
+                <ScalarProperty Name="JOB_ID" ColumnName="JOB_ID" />
+                <ScalarProperty Name="SITE_ID" ColumnName="SITE_ID" />
+                <ScalarProperty Name="JOB_TITLE" ColumnName="JOB_TITLE" />
+                <ScalarProperty Name="JOB_DESC" ColumnName="JOB_DESC" />
+                <ScalarProperty Name="CONTACT_EMAIL" ColumnName="CONTACT_EMAIL" />
+                <ScalarProperty Name="CONTACT_PHONE" ColumnName="CONTACT_PHONE" />
+                <ScalarProperty Name="JOB_SALARY" ColumnName="JOB_SALARY" />
+                <ScalarProperty Name="START_DATE" ColumnName="START_DATE" />
+                <ScalarProperty Name="CLOSE_DATE" ColumnName="CLOSE_DATE" />
+                <ScalarProperty Name="APPLICATION_METHOD" ColumnName="APPLICATION_METHOD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROGRAMMEs">
+            <EntityTypeMapping TypeName="Model.PROGRAMME">
+              <MappingFragment StoreEntitySet="PROGRAMME">
+                <ScalarProperty Name="PROGRAMME_CODE" ColumnName="PROGRAMME_CODE" />
+                <ScalarProperty Name="PROGRAMME_NAME" ColumnName="PROGRAMME_NAME" />
+                <ScalarProperty Name="PROGRAMME_LEADER" ColumnName="PROGRAMME_LEADER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SITES">
+            <EntityTypeMapping TypeName="Model.SITE">
+              <MappingFragment StoreEntitySet="SITES">
+                <ScalarProperty Name="SITE_ID" ColumnName="SITE_ID" />
+                <ScalarProperty Name="COMPANY_ID" ColumnName="COMPANY_ID" />
+                <ScalarProperty Name="SITE_ADDRESS" ColumnName="SITE_ADDRESS" />
+                <ScalarProperty Name="SITE_POSTCODE" ColumnName="SITE_POSTCODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STUDENTs">
+            <EntityTypeMapping TypeName="Model.STUDENT">
+              <MappingFragment StoreEntitySet="STUDENT">
+                <ScalarProperty Name="SRN" ColumnName="SRN" />
+                <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
+                <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
+                <ScalarProperty Name="STUDENT_USERNAME" ColumnName="STUDENT_USERNAME" />
+                <ScalarProperty Name="STUDENT_PASS" ColumnName="STUDENT_PASS" />
+                <ScalarProperty Name="PROGRAMME_CODE" ColumnName="PROGRAMME_CODE" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="HOUSE_NUMBER_TERM" ColumnName="HOUSE_NUMBER_TERM" />
+                <ScalarProperty Name="STREET_TERM" ColumnName="STREET_TERM" />
+                <ScalarProperty Name="POSTCODE_TERM" ColumnName="POSTCODE_TERM" />
+                <ScalarProperty Name="HOUSE_NUMBER_HOME" ColumnName="HOUSE_NUMBER_HOME" />
+                <ScalarProperty Name="STREET_HOME" ColumnName="STREET_HOME" />
+                <ScalarProperty Name="POSTCODE_HOME" ColumnName="POSTCODE_HOME" />
+                <ScalarProperty Name="MOBILE_NUMBER" ColumnName="MOBILE_NUMBER" />
+                <ScalarProperty Name="LANDLINE_NUMBER" ColumnName="LANDLINE_NUMBER" />
+                <ScalarProperty Name="EMAIL_ADDRESS" ColumnName="EMAIL_ADDRESS" />
+                <ScalarProperty Name="PLACEMENT_NOTES" ColumnName="PLACEMENT_NOTES" />
+                <ScalarProperty Name="CV_SUBMITTED" ColumnName="CV_SUBMITTED" />
+                <ScalarProperty Name="CV_APPROVED" ColumnName="CV_APPROVED" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

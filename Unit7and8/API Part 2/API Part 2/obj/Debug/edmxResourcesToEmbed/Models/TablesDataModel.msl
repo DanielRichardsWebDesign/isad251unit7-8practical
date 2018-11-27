@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities1">
+    <EntitySetMapping Name="ADMINs">
+      <EntityTypeMapping TypeName="Model.ADMIN">
+        <MappingFragment StoreEntitySet="ADMIN">
+          <ScalarProperty Name="ADMIN_ID" ColumnName="ADMIN_ID" />
+          <ScalarProperty Name="ADMIN_USERNAME" ColumnName="ADMIN_USERNAME" />
+          <ScalarProperty Name="ADMIN_PASSWORD" ColumnName="ADMIN_PASSWORD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="APPLICATIONs">
+      <EntityTypeMapping TypeName="Model.APPLICATION">
+        <MappingFragment StoreEntitySet="APPLICATION">
+          <ScalarProperty Name="APPLICATION_ID" ColumnName="APPLICATION_ID" />
+          <ScalarProperty Name="JOB_ID" ColumnName="JOB_ID" />
+          <ScalarProperty Name="SRN" ColumnName="SRN" />
+          <ScalarProperty Name="APP_STATUS" ColumnName="APP_STATUS" />
+          <ScalarProperty Name="DATE_SUBMITTED" ColumnName="DATE_SUBMITTED" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COMPANies">
+      <EntityTypeMapping TypeName="Model.COMPANY">
+        <MappingFragment StoreEntitySet="COMPANY">
+          <ScalarProperty Name="COMPANY_ID" ColumnName="COMPANY_ID" />
+          <ScalarProperty Name="COMPANY_NAME" ColumnName="COMPANY_NAME" />
+          <ScalarProperty Name="COMPANY_EMAIL" ColumnName="COMPANY_EMAIL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JOBs">
+      <EntityTypeMapping TypeName="Model.JOB">
+        <MappingFragment StoreEntitySet="JOB">
+          <ScalarProperty Name="JOB_ID" ColumnName="JOB_ID" />
+          <ScalarProperty Name="SITE_ID" ColumnName="SITE_ID" />
+          <ScalarProperty Name="JOB_TITLE" ColumnName="JOB_TITLE" />
+          <ScalarProperty Name="JOB_DESC" ColumnName="JOB_DESC" />
+          <ScalarProperty Name="CONTACT_EMAIL" ColumnName="CONTACT_EMAIL" />
+          <ScalarProperty Name="CONTACT_PHONE" ColumnName="CONTACT_PHONE" />
+          <ScalarProperty Name="JOB_SALARY" ColumnName="JOB_SALARY" />
+          <ScalarProperty Name="START_DATE" ColumnName="START_DATE" />
+          <ScalarProperty Name="CLOSE_DATE" ColumnName="CLOSE_DATE" />
+          <ScalarProperty Name="APPLICATION_METHOD" ColumnName="APPLICATION_METHOD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PROGRAMMEs">
+      <EntityTypeMapping TypeName="Model.PROGRAMME">
+        <MappingFragment StoreEntitySet="PROGRAMME">
+          <ScalarProperty Name="PROGRAMME_CODE" ColumnName="PROGRAMME_CODE" />
+          <ScalarProperty Name="PROGRAMME_NAME" ColumnName="PROGRAMME_NAME" />
+          <ScalarProperty Name="PROGRAMME_LEADER" ColumnName="PROGRAMME_LEADER" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SITES">
+      <EntityTypeMapping TypeName="Model.SITE">
+        <MappingFragment StoreEntitySet="SITES">
+          <ScalarProperty Name="SITE_ID" ColumnName="SITE_ID" />
+          <ScalarProperty Name="COMPANY_ID" ColumnName="COMPANY_ID" />
+          <ScalarProperty Name="SITE_ADDRESS" ColumnName="SITE_ADDRESS" />
+          <ScalarProperty Name="SITE_POSTCODE" ColumnName="SITE_POSTCODE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="STUDENTs">
+      <EntityTypeMapping TypeName="Model.STUDENT">
+        <MappingFragment StoreEntitySet="STUDENT">
+          <ScalarProperty Name="SRN" ColumnName="SRN" />
+          <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
+          <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
+          <ScalarProperty Name="STUDENT_USERNAME" ColumnName="STUDENT_USERNAME" />
+          <ScalarProperty Name="STUDENT_PASS" ColumnName="STUDENT_PASS" />
+          <ScalarProperty Name="PROGRAMME_CODE" ColumnName="PROGRAMME_CODE" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="HOUSE_NUMBER_TERM" ColumnName="HOUSE_NUMBER_TERM" />
+          <ScalarProperty Name="STREET_TERM" ColumnName="STREET_TERM" />
+          <ScalarProperty Name="POSTCODE_TERM" ColumnName="POSTCODE_TERM" />
+          <ScalarProperty Name="HOUSE_NUMBER_HOME" ColumnName="HOUSE_NUMBER_HOME" />
+          <ScalarProperty Name="STREET_HOME" ColumnName="STREET_HOME" />
+          <ScalarProperty Name="POSTCODE_HOME" ColumnName="POSTCODE_HOME" />
+          <ScalarProperty Name="MOBILE_NUMBER" ColumnName="MOBILE_NUMBER" />
+          <ScalarProperty Name="LANDLINE_NUMBER" ColumnName="LANDLINE_NUMBER" />
+          <ScalarProperty Name="EMAIL_ADDRESS" ColumnName="EMAIL_ADDRESS" />
+          <ScalarProperty Name="PLACEMENT_NOTES" ColumnName="PLACEMENT_NOTES" />
+          <ScalarProperty Name="CV_SUBMITTED" ColumnName="CV_SUBMITTED" />
+          <ScalarProperty Name="CV_APPROVED" ColumnName="CV_APPROVED" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
